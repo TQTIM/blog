@@ -1,2 +1,3 @@
 # blog
-blog of springboot
+blog of springboot！
+spirngboot+thymleaf+jpa
