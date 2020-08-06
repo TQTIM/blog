@@ -43,8 +43,8 @@
   <div class="ui attached pointing menu">
     <div class="ui container">
       <div class="right menu">
-        <a href="#" class="teal active item">新增</a>
-        <a href="#" class="item">列表</a>
+        <a href="#" th:href="@{/admin/types/input}" class="teal active item">新增</a>
+        <a href="#" th:href="@{/admin/types}" class="item">列表</a>
       </div>
     </div>
   </div>
@@ -52,17 +52,17 @@
 
   <!--中间内容-->
   <div  class="m-container-small m-padded-tb-massive">
-    <div class="ui container">
-      <form action="#" method="post" class="ui form">
-        <input type="hidden" name="id">
+    <div class="ui container">             <!--注意@{/admin/types}和@{admin/types}路径效果不一样，前者重根开始，后者拼接现路径后--><!--这里三目运算，编辑页面是共用的-->
+      <form action="#" method="post" class="ui form" th:object="${type}" th:action="*{id}==null ? @{/admin/types} : @{/admin/types/{id}(id=*{id})} ">
+        <input type="hidden" name="id" th:value="*{id}">
         <div class=" field">
           <div class="ui left labeled input">
             <label class="ui teal basic label">名称</label>
-            <input type="text" name="name" placeholder="分类名称">
+            <input type="text" name="name" placeholder="分类名称" th:value="*{name}">
           </div>
         </div>
         <div class="ui error message"></div>
-        <div class="ui mini negative message">提示：不能添加重复的分类</div>
+        <!--<div class="ui mini negative message">提示：不能添加重复的分类</div>-->
         <div class="ui right aligned container">
           <button type="button" class="ui button" onclick="window.history.go(-1)" >返回</button>
           <button class="ui teal submit button">提交</button>
